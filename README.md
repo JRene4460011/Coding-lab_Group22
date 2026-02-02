@@ -11,3 +11,38 @@ The system supports three types of logs:
 Each log can be archived on demand with a timestamped filename for traceability and auditing.
 
 ---
+## 2. Analysis Script (analyze_logs.sh)
+
+### Purpose
+The analyze_logs.sh script provides an interactive way to analyse archived or active hospital logs.  
+It extracts device statistics and temporal patterns from the selected log file and appends the results to a report.
+
+### How It Works
+
+#### 1. Interactive Menu
+When executed, the script displays:
+
+1) Heart Rate
+2) Temperature
+3) Water Usage
+
+The user selects a log file by entering a number between **1 and 3**.
+
+#### 2. Input Validation
+The script validates that:
+The user input is valid (1–3)
+The selected log file exists
+The log file is not empty
+
+If any condition fails, the script prints an error message and exits safely.
+
+#### 3. Data Analysis
+Using Linux text-processing tools, the script:
+Counts the total number of entries per device
+Determines the **first** and **last** timestamp recorded for each device
+
+The following commands are used:
+awk – extract device names and timestamps
+sort and uniq – count occurrences per device
+head and tail – identify first and last log entries
+grep – filter device-specific records
