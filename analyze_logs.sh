@@ -9,3 +9,5 @@ read -p "Enter choice (1-3): " choice_log_number
 
 REPORT_DIR="reports"
 REPORT_FILE="$REPORT_DIR/analysis_report.txt"
+
+# Contribution by James Ntwali
