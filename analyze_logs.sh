@@ -49,18 +49,19 @@ echo "Analyzing $LOG_NAME log..."
 
 {
     echo "=================================================="
-    echo "Analysis Timestamp: $(date +"%Y-%m-%d %H:%M:%S")"
+    echo "Analysis Timestamp: $timestamp"
     echo "Log Type: $LOG_NAME"
     echo "Log File: $LOG_FILE"
     echo
     echo "Device Statistics:"
     echo "------------------"
 
-    # Count occurrences per device and report first & last entry
+    # Count occurrences per device
     awk '{print $3}' "$LOG_FILE" | sort | uniq -c | while read count device
     do
         first_entry=$(grep "$device" "$LOG_FILE" | head -n 1 | awk '{print $1, $2}')
         last_entry=$(grep "$device" "$LOG_FILE" | tail -n 1 | awk '{print $1, $2}')
+
         echo "Device: $device"
         echo "  Total Entries: $count"
         echo "  First Entry:  $first_entry"
@@ -70,4 +71,3 @@ echo "Analyzing $LOG_NAME log..."
 } >> "$REPORT_FILE"
 
 echo "Analysis complete. Results appended to $REPORT_FILE"
-
