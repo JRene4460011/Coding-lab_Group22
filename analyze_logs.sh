@@ -1,14 +1,6 @@
 #!/bin/bash
-
-# Interactive Hospital Log Analysis Script
 # Contribution by James Ntwali
-
-echo -e "Select log file to analyze:\n"
-echo "1) Heart Rate"
-echo "2) Temperature"
-echo "3) Water Usage"
-
-read -p "Enter choice (1-3): " choice_log_number
+# This script assumes $LOG_FILE and $LOG_NAME are already defined externally
 
 REPORT_DIR="reports"
 REPORT_FILE="$REPORT_DIR/analysis_report.txt"
@@ -16,39 +8,6 @@ REPORT_FILE="$REPORT_DIR/analysis_report.txt"
 # Create report directory if it doesn't exist
 mkdir -p "$REPORT_DIR"
 
-# Map choice to log file and name
-case $choice_log_number in
-    1)
-        LOG_FILE="active_logs/heart_rate_log.log"
-        LOG_NAME="Heart Rate"
-        ;;
-    2)
-        LOG_FILE="active_logs/temperature_log.log"
-        LOG_NAME="Temperature"
-        ;;
-    3)
-        LOG_FILE="active_logs/water_usage_log.log"
-        LOG_NAME="Water Usage"
-        ;;
-    *)
-        echo "Invalid choice! Only 1-3 are allowed."
-        exit 1
-        ;;
-esac
-
-# Check if log file exists
-if [ ! -f "$LOG_FILE" ]; then
-    echo "Log file $LOG_FILE is missing! Cannot analyze."
-    exit 1
-fi
-
-# Check if log file is not empty
-if [ ! -s "$LOG_FILE" ]; then
-    echo "Log file $LOG_FILE is empty! No data to analyze."
-    exit 1
-fi
-
-# Analysis logic
 echo "Analyzing $LOG_NAME log..."
 
 {
