@@ -15,6 +15,25 @@ mkdir -p "$REPORT_DIR"
 
 timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
+case $choice_log_number in
+    1)
+        LOG_FILE="active_logs/heart_rate_log.log"
+        LOG_NAME="Heart Rate"
+        ;;
+    2)
+        LOG_FILE="active_logs/temperature_log.log"
+        LOG_NAME="Temperature"
+        ;;
+    3)
+        LOG_FILE="active_logs/water_usage_log.log"
+        LOG_NAME="Water Usage"
+        ;;
+    *)
+        echo "Unacceptable Number. Only 1-3 are allowed!"
+        exit 1
+        ;;
+esac
+
 echo "Analyzing $LOG_NAME log..."
 
 {
