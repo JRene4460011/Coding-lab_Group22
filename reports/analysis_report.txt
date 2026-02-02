@@ -15,3 +15,49 @@ Device: HeartRate_Monitor_B
   First Entry:  2026-01-30 05:49:33
   Last Entry:   2026-01-30 05:51:59
 
+==================================================
+Analysis Timestamp: 2026-02-02 10:53:30
+Log Type: Heart Rate
+Log File: active_logs/heart_rate_log.log
+
+Device Statistics:
+------------------
+Device: HeartRate_Monitor_A
+  Total Entries: 147
+  First Entry:  2026-01-30 05:49:33
+  Last Entry:   2026-01-30 05:51:59
+
+Device: HeartRate_Monitor_B
+  Total Entries: 147
+  First Entry:  2026-01-30 05:49:33
+  Last Entry:   2026-01-30 05:51:59
+
+==================================================
+Analysis Timestamp: 2026-02-02 10:53:35
+Log Type: Temperature
+Log File: active_logs/temperature_log.log
+
+Device Statistics:
+------------------
+Device: Temp_Recorder_A
+  Total Entries: 63
+  First Entry:  2026-01-30 05:50:57
+  Last Entry:   2026-01-30 05:51:59
+
+Device: Temp_Recorder_B
+  Total Entries: 63
+  First Entry:  2026-01-30 05:50:57
+  Last Entry:   2026-01-30 05:51:59
+
+==================================================
+Analysis Timestamp: 2026-02-02 10:53:41
+Log Type: Water Usage
+Log File: active_logs/water_usage_log.log
+
+Device Statistics:
+------------------
+Device: Water_Consumption_Meter
+  Total Entries: 33
+  First Entry:  2026-01-30 05:51:28
+  Last Entry:   2026-01-30 05:52:00
+
