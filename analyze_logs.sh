@@ -34,6 +34,17 @@ case $choice_log_number in
         ;;
 esac
 
+
+if [ ! -f "$LOG_FILE" ]; then
+    echo "Log file $LOG_FILE is missing! Cannot analyze."
+    exit 1
+fi
+
+if [ ! -s "$LOG_FILE" ]; then
+    echo "Log file $LOG_FILE is empty! No data to analyze."
+    exit 1
+fi
+
 echo "Analyzing $LOG_NAME log..."
 
 {
