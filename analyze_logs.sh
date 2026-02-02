@@ -10,9 +10,10 @@ read -p "Enter choice (1-3): " choice_log_number
 REPORT_DIR="reports"
 REPORT_FILE="$REPORT_DIR/analysis_report.txt"
 
-
 # Create report directory if it doesn't exist
 mkdir -p "$REPORT_DIR"
+
+timestamp=$(date +"%Y-%m-%d %H:%M:%S")
 
 echo "Analyzing $LOG_NAME log..."
 
