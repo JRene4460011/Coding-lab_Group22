@@ -46,3 +46,29 @@ awk – extract device names and timestamps
 sort and uniq – count occurrences per device
 head and tail – identify first and last log entries
 grep – filter device-specific records
+
+
+
+#### 4. Reporting
+Analysis results are appended (not overwritten) to:
+```text
+reports/analysis_report.txt
+```
+
+
+Each report entry includes:
+- Analysis timestamp
+- Log type analysed
+- Per-device total entry count
+- First and last recorded timestamps
+
+This allows historical analysis across multiple runs.
+
+---
+
+## Commands & Concepts Demonstrated
+- **`awk`**: Data extraction and aggregation
+- **`sort | uniq`**: Device occurrence counting
+- **`head / tail`**: Temporal analysis
+- **`grep`**: Device-specific filtering
+- **`>>`**: Appending results to a cumulative report
