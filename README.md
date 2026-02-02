@@ -11,6 +11,113 @@ The system supports three types of logs:
 Each log can be archived on demand with a timestamped filename for traceability and auditing.
 
 ---
+## Directory Structure
+The program expects the following directory structure:
+
+```text
+hospital_data/
+├── active_logs/
+│   ├── heart_rate.log
+│   ├── temperature.log
+│   └── water_usage.log
+│
+└── archived_logs/
+    ├── heart_data_archive/
+    ├── temperature_data_archive/
+    └── water_usage_data_archive/
+
+```
+- **`active_logs/`**: Contains the live log files being written to by monitoring scripts.
+- **`archived_logs/`**: Stores archived versions of logs, renamed with timestamps.
+
+## 1. Archiving Script (`archive_logs.sh`)
+
+### Purpose
+`archive_logs.sh` provides an interactive menu to archive a chosen log file. It performs the following specific actions:
+* Prompts the user to select a log type (1–3).
+* Archives only the selected log.
+* Renames the archived file using a current timestamp.
+* Creates a new, empty active log file so monitoring can continue seamlessly.
+
+## How It Works
+
+### 1. Interactive Menu
+When you run the script, it presents the following options:
+1.  Heart Rate
+2.  Temperature
+3.  Water Usage
+
+The user enters a number from **1 to 3**.
+
+### 2. Timestamp Generation
+The script generates a unique timestamp to ensure no data is overwritten.
+* **Command:** `date +"%Y-%m-%d_%H-%M-%S"`
+* **Format:** `YYYY-MM-DD_HH-MM-SS`
+* **Example:** `2026-01-31_09-42-10`
+
+### 3. Source and Destination Logic
+A `case` statement maps the user's choice to the specific source file and its corresponding archive folder.
+
+| Option | Log Type | Source File (`active_logs`) | Destination Path (`archived_logs`) |
+| :--- | :--- | :--- | :--- |
+| **1** | Heart Rate | `heart_rate.log` | `heart_data_archive/heart_rate_<timestamp>.log` |
+| **2** | Temperature | `temperature.log` | `temperature_data_archive/temperature_<timestamp>.log` |
+| **3** | Water Usage | `water_usage.log` | `water_usage_data_archive/water_usage_<timestamp>.log` |
+
+### 4. Error Handling
+Before attempting to archive, the script uses `test -f` to check if the source log exists.
+* **If exists:** The script proceeds to archive.
+* **If missing:** It prints an error message and aborts the operation. This prevents crashes if the monitoring simulator isn't running.
+
+### 5. Archiving & Log Rotation
+If the log exists, the script performs a "Log Rotation" using two steps:
+* **Move:** Moves the active log to the archive folder (`mv "$src" "$dest"`).
+* **Reset:** Creates a new empty file at the source location (`touch "$src"`).
+
+## How to Run
+
+
+### 1. Make Script Executable
+Ensure the script has run permissions:
+
+```bash
+
+chmod +x archive_logs.sh
+```
+
+### 2. Execute
+Run the script from the terminal:
+
+```bash
+
+./archive_logs.sh
+```
+
+## Example output
+
+```text
+Select log to archive:
+
+1) Heart Rate
+2) Temperature
+3) Water Usage
+   Enter choice (1-3): 1
+
+Archiving heart_rate.log...
+Successfully archived to hospital_data/archived_logs/heart_data_archive/heart_rate_2026-01-31_09-42-10.log
+```
+
+## Commands & Concepts Demonstrated
+- **`read`**: Capturing interactive user input.
+- **`case`**: Handling menu-based logic selection.
+- **`date`**: Generating dynamic timestamps for filenames.
+- **`test -f`**: Verifying file existence before processing.
+- **`mv`**: Moving logs into archive folders.
+- **`touch`**: Creating new empty active log files (Log Rotation).
+
+
+---
+
 ## 2. Analysis Script (analyze_logs.sh)
 
 ### Purpose
